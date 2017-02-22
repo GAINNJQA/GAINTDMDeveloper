@@ -15,7 +15,6 @@
 function Test1()
 {
   var explorer;
-  //var lookupDropDownListView_3;
   var optionsChainListView;
   var abbreviatedOrderPanel;
   var quantityEditor;
