@@ -15,7 +15,6 @@
 function Test1()
 {
   var explorer;
-  //var lookupDropDownListView_3;
   var optionsChainListView;
   var abbreviatedOrderPanel;
   var quantityEditor;
@@ -31,17 +30,18 @@ function Test1()
   symbolLookupControl["SetFocus"]();
   symbolLookupControl["Keys"]("[Caps]");
   symbolLookupControl["SetText"](Underlying);
-  Delay(2000);
+  Delay(1000);
   expirationdt["SetFocus"]();
   expirationdt["ClickItem"](Expdate);
+  Delay(1000);
   symbolLookupControl["Keys"]("[Enter]");
-  Delay(2000);
+  Delay(1000);
   SelectOptionType("C"); //select calls
-  //AddOptions("C", "Buy");
-  AddOptions("C", "Sell");
+  AddOptions("C", "Buy", "2");
+  AddOptions("C", "Sell", "1");
   SelectOptionType("P");
-  AddOptions("P", "Buy");
-  //AddOptions("P", "Sell");
+  AddOptions("P", "Buy", "1");
+  AddOptions("P", "Sell", "2");
   CloseOptionsWindow();
   Delay(3000);
 }
@@ -59,7 +59,7 @@ function OpenOptionChainWindow()
   tdm["MainForm"]["StripMainMenu"]["Click"]("View|Options Chain|New Window");
 }
 
-function AddOptions(optiontype, side)
+function AddOptions(optiontype, side, qty)
 {
   optionsChainListView = optionsChainPanel["pnChainContainer"]["lvChain"];
   var wItemCount = optionsChainListView.wItemCount;
@@ -77,18 +77,19 @@ function AddOptions(optiontype, side)
        {
         Log["Message"](Symbol);
         optionsChainListView["ClickItem"](i,1);
-        Delay(2000);
+        //Delay(1000);
         optionsChainListView["ClickItemR"](i,1);
-        Delay(2000);
+        //Delay(1000);
         //var selectoption = "Buy " + Symbol;
         var selectoption = side + " " + Symbol;
+        //Delay(1000);
         optionsChainListView["StripPopupMenu"]["Click"](selectoption);
-        Delay(3000);
+        Delay(1000);
         abbreviatedOrderPanel = toolStripContentPanel["OrderEntry"]["pnContainer"]["AbbreviatedOrderPanel"];
         quantityEditor = abbreviatedOrderPanel["simpleTicket"]["groupBox2"]["qtyCombo"];
         Delay(1000);
         quantityEditor["SetFocus"](); //Set Focus to Quantity Editbox
-        quantityEditor["Keys"]("1");
+        quantityEditor["Keys"](qty);
   
         button = abbreviatedOrderPanel["pnlBottomButtons"]["button1"];
         button["Click"](62, 14);
