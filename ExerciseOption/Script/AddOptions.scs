@@ -1,0 +1,123 @@
+﻿//USEUNIT Library
+
+  var tdm;
+  var dockForm;
+  var toolStripContentPanel;
+  var optionsChainPanel;
+  var symbolLookupControl;
+  tdm = Aliases["tdm"];
+  expirationdt = Aliases["tdm"]["DockForm"]["panel"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["OptionsChainPanel"]["pnFilter"]["cbExpiration"];
+  dockForm = tdm["DockForm"];
+  toolStripContentPanel = dockForm["panel"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"];
+  optionsChainPanel = toolStripContentPanel["OptionsChainPanel"];
+  symbolLookupControl = optionsChainPanel["pnFilter"]["contractLookup"]["symbolLookup"];
+
+function Test1()
+{
+  var explorer;
+  //var lookupDropDownListView_3;
+  var optionsChainListView;
+  var abbreviatedOrderPanel;
+  var quantityEditor;
+  var button;
+  var button2;
+
+  var Underlying = OptionSymbolDriver["Value"](0); //Select Underlying
+  var Expdate = OptionSymbolDriver["Value"](1); //Select Expiration date
+
+  OpenOptionChainWindow();
+  Delay(2000);
+
+  symbolLookupControl["SetFocus"]();
+  symbolLookupControl["Keys"]("[Caps]");
+  symbolLookupControl["SetText"](Underlying);
+  Delay(2000);
+  expirationdt["SetFocus"]();
+  expirationdt["ClickItem"](Expdate);
+  symbolLookupControl["Keys"]("[Enter]");
+  Delay(2000);
+  SelectOptionType("C"); //select calls
+  //AddOptions("C", "Buy");
+  AddOptions("C", "Sell");
+  SelectOptionType("P");
+  AddOptions("P", "Buy");
+  //AddOptions("P", "Sell");
+  CloseOptionsWindow();
+  Delay(3000);
+}
+
+
+function CloseOptionsWindow()
+{
+  Aliases["tdm"]["DockForm"]["Close"]();
+}
+
+
+
+function OpenOptionChainWindow()
+{
+  tdm["MainForm"]["StripMainMenu"]["Click"]("View|Options Chain|New Window");
+}
+
+function AddOptions(optiontype, side)
+{
+  optionsChainListView = optionsChainPanel["pnChainContainer"]["lvChain"];
+  var wItemCount = optionsChainListView.wItemCount;
+  var colcount = optionsChainListView["Columns"]["Count"];
+  //ShowMessage("COLUMNS:" + colcount);
+  
+  for (var i=0; i<wItemCount;i++)
+  {
+  
+      var Symbol = optionsChainListView["wItem"](i,1);
+      var CBid = optionsChainListView["wItem"](i,2);
+      var CAsk =  optionsChainListView["wItem"](i,3);
+   
+       if(CBid != "" && CAsk != "")
+       {
+        Log["Message"](Symbol);
+        optionsChainListView["ClickItem"](i,1);
+        Delay(2000);
+        optionsChainListView["ClickItemR"](i,1);
+        Delay(2000);
+        //var selectoption = "Buy " + Symbol;
+        var selectoption = side + " " + Symbol;
+        optionsChainListView["StripPopupMenu"]["Click"](selectoption);
+        Delay(3000);
+        abbreviatedOrderPanel = toolStripContentPanel["OrderEntry"]["pnContainer"]["AbbreviatedOrderPanel"];
+        quantityEditor = abbreviatedOrderPanel["simpleTicket"]["groupBox2"]["qtyCombo"];
+        Delay(1000);
+        quantityEditor["SetFocus"](); //Set Focus to Quantity Editbox
+        quantityEditor["Keys"]("1");
+  
+        button = abbreviatedOrderPanel["pnlBottomButtons"]["button1"];
+        button["Click"](62, 14);
+        button2 = tdm["OrderMessageDialog"]["panel3"]["pnlButtons"]["btnOK"];
+        button2["Click"](49, 20);
+        dockForm["Close"]();
+        if(optiontype == "C")
+        {
+            Log["Message"]("TC_TDM_AddNewCallOption" + i + " is Passed");
+        }
+        else
+        {
+            Log["Message"]("TC_TDM_AddNewPutOption" + i + " is Passed");
+        }
+       }
+  }
+}
+
+function SelectOptionType(optiontype)
+{
+  var optionChainTypeCombo;
+  optionChainTypeCombo = Aliases["tdm"]["DockForm"]["panel"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["OptionsChainPanel"]["pnFilter"]["cbType"];
+  if(optiontype == "C")
+  {
+      optionChainTypeCombo["ClickItem"]("Calls");
+  }
+  else
+  {
+      optionChainTypeCombo["ClickItem"]("Puts");
+  }
+}
+

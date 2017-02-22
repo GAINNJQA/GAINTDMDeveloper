@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Root signature="{24B6FA0B-0143-461A-9758-AEB9E9A9428B}" version="12.0" key="{9806F58D-4BD8-454B-A257-8F583DADD071}">
+	<children>
+		<child name="ExerciseOption" key="{29530425-197C-4CA0-A721-89E705DA098C}" type="Project" typeId="{362A8EE5-675E-43A9-869D-06ECE80B0CB4}" pluginName="">
+			<data path="ExerciseOption\ExerciseOption.mds" />
+		</child>
+	</children>
+	<folders />
+	<testItems key="{97227B8A-D2A4-40E1-99CB-4E78FC5636D9}">
+		<children>
+			<testItem key="{29530425-197C-4CA0-A721-89E705DA098C}" enabled="True" timeout="0" stopOnError="True" description="" />
+		</children>
+	</testItems>
+	<variables key="{EA29D88D-9B7D-438B-865E-E114942DBA6E}">
+		<data Version="3" />
+	</variables>
+	<analysis key="{7E272DBD-7705-4406-AFFA-8149D5C73225}" />
+	<scc key="{C900492B-D218-429C-9AA0-264B7D78CA88}" name="Git Plugin">
+		<data />
+	</scc>
+	<extender key="{1A3FC97E-9A66-4716-B166-35D10B4146E0}" />
+</Root>

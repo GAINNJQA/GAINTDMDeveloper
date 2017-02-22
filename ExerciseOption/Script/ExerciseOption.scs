@@ -1,0 +1,191 @@
+﻿//USEUNIT Library
+  var tdm;
+  var mainForm;
+  var expiringOptionsDialog;
+  var optionPositionListView;
+  var optionChainRangeCombo;
+  var dockTabControl;
+  dockTabControl = Aliases["tdm"]["MainForm"]["workspaceContainer"]["VSplit2"]["DelayedLayoutPanel"]["HSplit"]["DelayedLayoutPanel"]["DockContainer"]["DockTabControl"];
+  var detailedPositionListView;
+  
+  
+  tdm = Aliases["tdm"];
+  mainForm = tdm["MainForm"];
+  Delay(1000);
+  expiringOptionsDialog = tdm["ExpiringOptionsDialog"];
+  optionPositionListView = expiringOptionsDialog["lvExpiringOptions"];
+
+
+
+
+function Test_ExerciseOption()
+{
+    mainForm["StripMainMenu"]["Click"]("Tools|Expiring Options...");
+    SelectPositionListView("InMoney");
+    ClickExerciseOption();
+    SelectPositionListView("OutMoney");
+    ClickExerciseOption();
+    CloseExpiringOptionsWindow();
+}
+    
+function SelectPositionListView(optionvalue)
+{
+  var dtExp = OptionSymbolDriver["Value"](2); //select expiration date
+  //ShowMessage(dtExp);
+  DDT["CloseDriver"](OptionSymbolDriver["Name"]); //Close Excel Driver
+  panel = expiringOptionsDialog["panel1"];
+  panel["dtExpiration"]["wDate"] = dtExp;
+  optionChainRangeCombo = panel["cbRange"];
+  optionChainRangeCombo["ClickItem"](optionvalue);
+  Delay(1000);
+  var wItemCount = optionPositionListView.wItemCount;
+
+  for (var i=0; i<wItemCount;i++)
+  {
+    var account = optionPositionListView["wItem"](i,0);
+    var symbol = optionPositionListView["wItem"](i,1);
+    var strikepx = optionPositionListView["wItem"](i,3);
+    var settlepx = optionPositionListView["wItem"](i,5);
+    aqString["ListSeparator"] = " ";
+    var OptionString = aqString["GetListItem"](symbol, 1);
+    var OptionType = aqString.SubString(OptionString,0,1);
+  
+    if (optionvalue == "InMoney")
+    {
+        switch(OptionType)
+      {
+        case 'P':
+        if(strikepx > settlepx)
+        {
+             Log["Message"]("TC_TDM_Put_InTheMoney_" + i + " is Passed");
+        }
+        else
+        {
+            Log["Warning"]("TC_TDM_Put_InTheMoney_" + i + " is Failed");
+        }
+        break;
+        case 'C':
+        if(strikepx < settlepx)
+         {
+             Log["Message"]("TC_TDM_Call_InTheMoney_" + i + " is Passed");
+        }
+        else
+        {
+            Log["Warning"]("TC_TDM_Call_InTheMoney_" + i + " is Failed");
+        }
+      }
+    }
+    else if (optionvalue == "OutMoney")
+    {
+      switch(OptionType)
+      {
+        case 'P':
+        if(strikepx < settlepx)
+        {
+             Log["Message"]("TC_TDM_Put_OutTheMoney_" + i + " is Passed");
+        }
+        else
+        {
+            Log["Warning"]("TC_TDM_Put_OutTheMoney_" + i + " Failed");
+        }
+        break;
+        case 'C':
+        if(strikepx > settlepx)
+         {
+             Log["Message"]("TC_TDM_Call_OutTheMoney_" + i + "  is Passed");
+        }
+        else
+        {
+            Log["Warning"]("TC_TDM_Call_OutTheMoney_" + i + " is Failed");
+        }
+      }
+    }
+}
+
+}
+  
+
+
+function ClickExerciseOption()
+{
+  var wItemCount = optionPositionListView.wItemCount;
+
+  for (var i=0; i<wItemCount;i++)
+  {
+    var account = optionPositionListView["wItem"](0,0); //always the first item in the list
+    var vsymbol = optionPositionListView["wItem"](0,1);
+    optionPositionListView["ClickItem"](account);
+    expiringOptionsDialog["panel2"]["btnExercise"]["ClickButton"]();
+    button = tdm["MessageDialog"]["panel3"]["pnlButtons"]["btnOK"];
+    button["ClickButton"](); //click yes
+    button["ClickButton"](); //click ok on the OptionExercing/Assignment Complete dialog
+    CheckDetailedPositions(vsymbol);
+  }
+  
+    var wItemCount = optionPositionListView.wItemCount;
+    if(wItemCount == 0)
+    {
+      Log["Message"]("TC_TDM_ClickExerciseOption is passed");
+    }
+    else
+    {
+      Log["Warning"]("TC_TDM_ClickExerciseOption is failed");
+    }
+}
+
+function CheckDetailedPositions(vsymbol)
+{
+
+  detailedPositionListView = dockTabControl["DockTabPage"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["DetailedPositionListPanel"]["DetailedPositionListView"];
+  Delay(1000);
+  var dItemCount = detailedPositionListView.wItemCount;
+    for (var i=0; i<dItemCount;i++)
+  {
+  
+    var symbol = detailedPositionListView["wItem"](i,0);
+    if(vsymbol == symbol)
+    {
+      var openpl =  detailedPositionListView["wItem"](i,6);
+      var openplUSD =  detailedPositionListView["wItem"](i,7);
+      //ShowMessage(symbol);
+      //ShowMessage(openpl);
+      if(openpl == "0.00 USD") //Check Open PL
+      {
+        Log["Message"]("TC_TDM_CheckOpenPL is passed");
+        Log["Message"]("TC_TDM_CheckOpenPL: OpenPL:" + openpl);
+      }
+      else
+      {
+        Log["Warning"]("TC_TDM_CheckOpenPL is failed");
+      }
+      
+      if(openplUSD == "$0.00")
+      {
+        Log["Message"]("TC_TDM_CheckOpenPLUSD is passed");
+      }
+      else
+      {
+        Log["Warning"]("TC_TDM_CheckOpenPLUSD is failed");
+      }
+    } 
+  }
+}
+
+
+function CloseExpiringOptionsWindow()
+{
+  Aliases["tdm"]["ExpiringOptionsDialog"]["Close"]();
+}
+
+
+function Test1()
+{
+  var dockTabControl;
+  var detailedPositionListView;
+  dockTabControl = Aliases["tdm"]["MainForm"]["workspaceContainer"]["VSplit2"]["DelayedLayoutPanel"]["HSplit"]["DelayedLayoutPanel"]["DockContainer"]["DockTabControl"];
+  dockTabControl["ClickTab"]("Detailed Positions");
+  detailedPositionListView = dockTabControl["DockTabPage"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["DetailedPositionListPanel"]["DetailedPositionListView"];
+  detailedPositionListView["ClickItem"](1, "$0.00");
+  detailedPositionListView["ClickItem"](0, 5);
+  detailedPositionListView["ClickItem"]("LEG7", "$0.00");
+}

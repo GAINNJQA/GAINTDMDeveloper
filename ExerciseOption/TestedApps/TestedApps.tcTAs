@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Root signature="{90D101C8-80C7-48D4-9055-2E451B9BCD75}" version="1140" key="{79BEEE70-A602-4C03-AF2C-778374B4BDB6}" type="Tested Applications" typeId="{90D101C8-80C7-48D4-9055-2E451B9BCD75}">
+	<config nodeName="TestedApps" />
+	<testData />
+	<data />
+	<children>
+		<child key="{8D84728A-2EA5-4C14-A03C-8B67EF57E688}" type="Tested Application" typeId="{FD30A383-63C2-4C25-948C-2595C0F81320}">
+			<config nodeName="TDM" autorunOnRecording="False" enabled="True" count="1" useFeaturedRuntimeObject="True" userChangeName="False">
+				<runModeParams activeRunMode="Simple">
+					<param name="RunAs" parameters="" workFolder="C:\Program Files (x86)\GAIN\TDM Dev 3.5\TDM.exe" userName="" password="" domain="" />
+					<param name="Profile" parameters="" workFolder="C:\Program Files (x86)\GAIN\TDM Dev 3.5\TDM.exe" />
+					<param name="Debug" parameters="" workFolder="C:\Program Files (x86)\GAIN\TDM Dev 3.5\TDM.exe" />
+					<param name="Simple" fileName="TDM.exe" filePath="" parameters="" workFolder="C:\Program Files (x86)\GAIN\TDM Dev 3.5\TDM.exe" />
+				</runModeParams>
+			</config>
+			<testData />
+			<data />
+		</child>
+	</children>
+	<folders />
+</Root>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Root signature="{9252F941-DB23-4FCA-AA50-858B33BB4A19}" version="11.40">
+	<children>
+		<child name="ExerciseOption" key="{9F4A9DA7-32D1-4FA9-A58E-0423FB5B1361}" type="Script Unit" typeId="{291CAE9C-4D20-4F33-8B5F-D48B587F3D65}" pluginName="Script">
+			<data path="ExerciseOption.scs" />
+		</child>
+		<child name="AddOptions" key="{F647E3C5-AA7D-4C07-94E1-35D94CD54088}" type="Script Unit" typeId="{291CAE9C-4D20-4F33-8B5F-D48B587F3D65}" pluginName="Script">
+			<data path="AddOptions.scs" />
+		</child>
+		<child name="Library" key="{64BF79E9-F43E-4FB3-AF8E-D762EB519EAE}" type="Script Unit" typeId="{291CAE9C-4D20-4F33-8B5F-D48B587F3D65}" pluginName="Script">
+			<data path="Library.scs" />
+		</child>
+	</children>
+	<folders />
+</Root>

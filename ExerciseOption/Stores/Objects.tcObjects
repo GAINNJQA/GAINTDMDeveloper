@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Root signature="{30501691-969F-4007-923F-BA4459E51E6A}" version="12.0">
+	<children>
+		<child name="lvExpiringOptions1" key="{898CAC19-AC91-471B-8CDA-ABD96AF5CAF7}" type="Object" typeId="{5EFCFFBB-0DF6-45A2-ADB2-4FD0BF2A280B}" pluginName="Stores">
+			<data signature="{5EFCFFBB-0DF6-45A2-ADB2-4FD0BF2A280B}" version="12.0" caption="lvExpiringOptions1" ID="{898CAC19-AC91-471B-8CDA-ABD96AF5CAF7}" FileName="Objects\lvExpiringOptions1.tcObject" Update="False" />
+		</child>
+		<child name="lvExpiringOptions2" key="{FEF13FCD-A748-4111-BC9A-A5FBE689730B}" type="Object" typeId="{5EFCFFBB-0DF6-45A2-ADB2-4FD0BF2A280B}" pluginName="Stores">
+			<data signature="{5EFCFFBB-0DF6-45A2-ADB2-4FD0BF2A280B}" version="12.0" caption="lvExpiringOptions2" ID="{FEF13FCD-A748-4111-BC9A-A5FBE689730B}" FileName="Objects\lvExpiringOptions2.tcObject" Update="False" />
+		</child>
+	</children>
+	<folders />
+</Root>
