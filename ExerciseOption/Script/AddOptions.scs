@@ -36,11 +36,11 @@ function Test1()
   symbolLookupControl["Keys"]("[Enter]");
   Delay(2000);
   SelectOptionType("C"); //select calls
-  //AddOptions("C", "Buy");
+  AddOptions("C", "Buy");
   AddOptions("C", "Sell");
   SelectOptionType("P");
   AddOptions("P", "Buy");
-  //AddOptions("P", "Sell");
+  AddOptions("P", "Sell");
   CloseOptionsWindow();
   Delay(3000);
 }
