@@ -17,12 +17,12 @@
 
 
 
-
 function Test_ExerciseOption()
 {
     mainForm["StripMainMenu"]["Click"]("Tools|Expiring Options...");
     SelectPositionListView("InMoney");
     ClickExerciseOption();
+    Delay(2000);
     SelectPositionListView("OutMoney");
     ClickExerciseOption();
     CloseExpiringOptionsWindow();

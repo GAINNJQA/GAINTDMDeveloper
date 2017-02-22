@@ -1,3 +1,3 @@
-﻿  var ProjectLocation = "C:\\OECTrader\\TestComplete-Scripts\\TDMSuite\\";
+﻿  var ProjectLocation = "C:\\OEC-Automation\\DataFiles\\";
   var OptionSymbolDriver = DDT["ExcelDriver"](ProjectLocation+"DataFiles\\DataTables.xlsx","Underlying",true)
   
