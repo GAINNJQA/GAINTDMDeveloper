@@ -1,3 +1,7 @@
 ﻿  var ProjectLocation = "C:\\OEC-Automation\\";
   var OptionSymbolDriver = DDT["ExcelDriver"](ProjectLocation+"DataFiles\\DataTables.xlsx","Underlying",true)
   
+  function ExcelCloseDriver()
+  {
+     DDT["CloseDriver"](OptionSymbolDriver["Name"]); //Close Excel Driver
+  }

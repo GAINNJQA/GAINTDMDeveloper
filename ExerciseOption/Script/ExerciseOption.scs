@@ -26,13 +26,14 @@ function Test_ExerciseOption()
     SelectPositionListView("OutMoney");
     ClickExerciseOption();
     CloseExpiringOptionsWindow();
+    ExcelCloseDriver();
 }
     
 function SelectPositionListView(optionvalue)
 {
   var dtExp = OptionSymbolDriver["Value"](2); //select expiration date
   //ShowMessage(dtExp);
-  DDT["CloseDriver"](OptionSymbolDriver["Name"]); //Close Excel Driver
+ 
   panel = expiringOptionsDialog["panel1"];
   panel["dtExpiration"]["wDate"] = dtExp;
   optionChainRangeCombo = panel["cbRange"];
@@ -55,23 +56,25 @@ function SelectPositionListView(optionvalue)
         switch(OptionType)
       {
         case 'P':
-        if(strikepx > settlepx)
+        if(strikepx >= settlepx)
         {
              Log["Message"]("TC_TDM_Put_InTheMoney_" + i + " is Passed");
         }
         else
         {
             Log["Warning"]("TC_TDM_Put_InTheMoney_" + i + " is Failed");
+            Log["Warning"]("Prices moved" + "Strike Price:" + strikepx + "Settle Price:" + settlepx);
         }
         break;
         case 'C':
-        if(strikepx < settlepx)
+        if(strikepx <= settlepx)
          {
              Log["Message"]("TC_TDM_Call_InTheMoney_" + i + " is Passed");
         }
         else
         {
             Log["Warning"]("TC_TDM_Call_InTheMoney_" + i + " is Failed");
+            Log["Warning"]("Prices moved" + "Strike Price:" + strikepx + "Settle Price:" + settlepx);
         }
       }
     }
@@ -178,14 +181,3 @@ function CloseExpiringOptionsWindow()
 }
 
 
-function Test1()
-{
-  var dockTabControl;
-  var detailedPositionListView;
-  dockTabControl = Aliases["tdm"]["MainForm"]["workspaceContainer"]["VSplit2"]["DelayedLayoutPanel"]["HSplit"]["DelayedLayoutPanel"]["DockContainer"]["DockTabControl"];
-  dockTabControl["ClickTab"]("Detailed Positions");
-  detailedPositionListView = dockTabControl["DockTabPage"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["DetailedPositionListPanel"]["DetailedPositionListView"];
-  detailedPositionListView["ClickItem"](1, "$0.00");
-  detailedPositionListView["ClickItem"](0, 5);
-  detailedPositionListView["ClickItem"]("LEG7", "$0.00");
-}
