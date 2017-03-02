@@ -8,7 +8,6 @@
   dockTabControl = Aliases["tdm"]["MainForm"]["workspaceContainer"]["VSplit2"]["DelayedLayoutPanel"]["HSplit"]["DelayedLayoutPanel"]["DockContainer"]["DockTabControl"];
   var detailedPositionListView;
   
-  
   tdm = Aliases["tdm"];
   mainForm = tdm["MainForm"];
   Delay(1000);
@@ -19,6 +18,7 @@
 
 function Test_ExerciseOption()
 {
+    ClickDetPositionTab();
     mainForm["StripMainMenu"]["Click"]("Tools|Expiring Options...");
     SelectPositionListView("InMoney");
     ClickExerciseOption();
@@ -26,6 +26,7 @@ function Test_ExerciseOption()
     SelectPositionListView("OutMoney");
     ClickExerciseOption();
     CloseExpiringOptionsWindow();
+    ClickAllTab();
     ExcelCloseDriver();
 }
     
@@ -112,11 +113,12 @@ function SelectPositionListView(optionvalue)
 function ClickExerciseOption()
 {
   var wItemCount = optionPositionListView.wItemCount;
-
+  
   for (var i=0; i<wItemCount;i++)
   {
     var account = optionPositionListView["wItem"](0,0); //always the first item in the list
     var vsymbol = optionPositionListView["wItem"](0,1);
+    var amount = optionPositionListView["wItem"](0,6);
     optionPositionListView["ClickItem"](account);
     expiringOptionsDialog["panel2"]["btnExercise"]["ClickButton"]();
     button = tdm["MessageDialog"]["panel3"]["pnlButtons"]["btnOK"];
@@ -138,24 +140,25 @@ function ClickExerciseOption()
 
 function CheckDetailedPositions(vsymbol)
 {
-
   detailedPositionListView = dockTabControl["DockTabPage"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["DetailedPositionListPanel"]["DetailedPositionListView"];
   Delay(1000);
   var dItemCount = detailedPositionListView.wItemCount;
-    for (var i=0; i<dItemCount;i++)
+  var amount = 0;
+  for (var i=0; i<dItemCount;i++)
   {
-  
     var symbol = detailedPositionListView["wItem"](i,0);
     if(vsymbol == symbol)
     {
+      //amount = StrToInt(detailedPositionListView["wItem"](i,3)) + StrToInt(amount);
+
       var openpl =  detailedPositionListView["wItem"](i,6);
       var openplUSD =  detailedPositionListView["wItem"](i,7);
-      //ShowMessage(symbol);
-      //ShowMessage(openpl);
+
       if(openpl == "0.00 USD") //Check Open PL
       {
         Log["Message"]("TC_TDM_CheckOpenPL is passed");
         Log["Message"]("TC_TDM_CheckOpenPL: OpenPL:" + openpl);
+
       }
       else
       {
@@ -170,7 +173,7 @@ function CheckDetailedPositions(vsymbol)
       {
         Log["Warning"]("TC_TDM_CheckOpenPLUSD is failed");
       }
-    } 
+    }     
   }
 }
 
@@ -181,3 +184,32 @@ function CloseExpiringOptionsWindow()
 }
 
 
+function ClickAllTab()
+{
+  var dockTabControl;
+  dockTabControl = Aliases["tdm"]["MainForm"]["workspaceContainer"]["VSplit2"]["DelayedLayoutPanel"]["HSplit"]["DelayedLayoutPanel"]["DockContainer"]["DockTabControl"];
+  var TabPage = dockTabControl["GetTabPage"](0);
+  var txtTabPage = TabPage["Text"];
+
+  dockTabControl["ClickTab"](txtTabPage);
+  var AvgPosnListView = dockTabControl["DockTabPage2"]["DockContainer"]["toolStripContainer"]["ToolStripContentPanel"]["TDMAvgPositionListPanel"]["AvgPositionListView"];
+  var wItemCount = AvgPosnListView.wItemCount;
+  //ShowMessage(wItemCount);
+  
+  for(var i=0; i<wItemCount;i++)
+  {
+       var Symbol = AvgPosnListView["wItem"](i,1);
+       var NetPosn = AvgPosnListView["wItem"](i,8);
+       var Underlying = OptionSymbolDriver["Value"](0);
+       if(Symbol != Underlying)
+       {
+          Log["Message"]("TC_TDM_CheckNetPosition is passed " + "Symbol: " + Symbol +  "Net Position: " + NetPosn );
+       }
+       
+  }
+}
+
+function ClickDetPositionTab()
+{
+  Aliases["tdm"]["MainForm"]["workspaceContainer"]["VSplit2"]["DelayedLayoutPanel"]["HSplit"]["DelayedLayoutPanel"]["DockContainer"]["DockTabControl"]["ClickTab"]("Detailed Positions");
+}

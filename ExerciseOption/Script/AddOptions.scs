@@ -32,6 +32,7 @@ function Test1()
   symbolLookupControl["SetText"](Underlying);
   Delay(1000);
   expirationdt["SetFocus"]();
+  Delay(1000);
   expirationdt["ClickItem"](Expdate);
   Delay(1000);
   symbolLookupControl["Keys"]("[Enter]");
@@ -68,7 +69,6 @@ function AddOptions(optiontype, side, qty)
   
   for (var i=0; i<wItemCount;i++)
   {
-  
       var Symbol = optionsChainListView["wItem"](i,1);
       var CBid = optionsChainListView["wItem"](i,2);
       var CAsk =  optionsChainListView["wItem"](i,3);
@@ -77,10 +77,8 @@ function AddOptions(optiontype, side, qty)
        {
         Log["Message"](Symbol);
         optionsChainListView["ClickItem"](i,1);
-        //Delay(1000);
+
         optionsChainListView["ClickItemR"](i,1);
-        //Delay(1000);
-        //var selectoption = "Buy " + Symbol;
         var selectoption = side + " " + Symbol;
         //Delay(1000);
         optionsChainListView["StripPopupMenu"]["Click"](selectoption);
@@ -88,7 +86,7 @@ function AddOptions(optiontype, side, qty)
         abbreviatedOrderPanel = toolStripContentPanel["OrderEntry"]["pnContainer"]["AbbreviatedOrderPanel"];
         quantityEditor = abbreviatedOrderPanel["simpleTicket"]["groupBox2"]["qtyCombo"];
         Delay(1000);
-        quantityEditor["SetFocus"](); //Set Focus to Quantity Editbox
+        quantityEditor["ClickItem"](1); //Set Focus to Quantity Editbox
         quantityEditor["Keys"](qty);
   
         button = abbreviatedOrderPanel["pnlBottomButtons"]["button1"];

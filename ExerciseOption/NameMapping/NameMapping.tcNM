@@ -231,6 +231,71 @@
 																									</Child>
 																								</Children>
 																							</Child>
+																							<Child Name="DockTabPage2" Key="{B9F74FC3-C748-464B-9E5E-E1050F4E6EEC}" ParallelWalk="True">
+																								<Properties>
+																									<Property Name="ClrFullClassName">
+																										<Value PropertyType="0" Value="OEC.UI.Layout.DockTabPage" Type="5" />
+																									</Property>
+																									<Property Name="WndCaption">
+																										<Value PropertyType="0" Value="All:15" Type="5" />
+																									</Property>
+																								</Properties>
+																								<Children>
+																									<Child Name="DockContainer" Key="{54C2644C-5199-447A-A5CB-B06BA2776BEA}" ParallelWalk="True">
+																										<Properties>
+																											<Property Name="WinFormsControlName">
+																												<Value PropertyType="0" Value="DockContainer" Type="5" />
+																											</Property>
+																										</Properties>
+																										<Children>
+																											<Child Name="toolStripContainer" Key="{515102C4-7847-45F2-A9F8-D89F3F595C07}" ParallelWalk="True">
+																												<Properties>
+																													<Property Name="WinFormsControlName">
+																														<Value PropertyType="0" Value="toolStripContainer" Type="5" />
+																													</Property>
+																												</Properties>
+																												<Children>
+																													<Child Name="ToolStripContentPanel" Key="{3BA50A5F-C1B6-4418-A21B-E76378BFC29F}" ParallelWalk="True">
+																														<Properties>
+																															<Property Name="ClrFullClassName">
+																																<Value PropertyType="0" Value="System.Windows.Forms.ToolStripContentPanel" Type="5" />
+																															</Property>
+																															<Property Name="WndCaption">
+																																<Value PropertyType="0" Value="" Type="5" />
+																															</Property>
+																															<Property Name="Index">
+																																<Value PropertyType="0" Value="1" Type="0" />
+																															</Property>
+																														</Properties>
+																														<Children>
+																															<Child Name="TDMAvgPositionListPanel" Key="{CD57EF80-9ED7-4363-8B6A-3F5E4838578A}" ParallelWalk="True">
+																																<Properties>
+																																	<Property Name="WinFormsControlName">
+																																		<Value PropertyType="0" Value="TDMAvgPositionListPanel" Type="5" />
+																																	</Property>
+																																</Properties>
+																																<Children>
+																																	<Child Name="AvgPositionListView" Key="{54CCD96F-3BE8-4A95-B90B-677B4873DFCB}" ParallelWalk="True">
+																																		<TypeInfo Item0="{4B9BB19C-6482-4989-A783-B166990899D5}" />
+																																		<Properties>
+																																			<Property Name="ClrFullClassName">
+																																				<Value PropertyType="0" Value="OEC.TDM.AvgPositionListView" Type="5" />
+																																			</Property>
+																																			<Property Name="WndCaption">
+																																				<Value PropertyType="0" Value="" Type="5" />
+																																			</Property>
+																																		</Properties>
+																																	</Child>
+																																</Children>
+																															</Child>
+																														</Children>
+																													</Child>
+																												</Children>
+																											</Child>
+																										</Children>
+																									</Child>
+																								</Children>
+																							</Child>
 																						</Children>
 																					</Child>
 																				</Children>
@@ -282,7 +347,7 @@
 									</Child>
 								</Children>
 							</Child>
-							<Child Name="DockForm" Key="{DF88A074-5451-4BD3-8DDF-15714BE7726A}" ParallelWalk="True">
+							<Child Name="DockForm" Key="{DF88A074-5451-4BD3-8DDF-15714BE7726A}" ParallelWalk="True" MultiVersion="True">
 								<Properties>
 									<Property Name="WinFormsControlName">
 										<Value PropertyType="0" Value="DockForm" Type="5" />
@@ -562,6 +627,17 @@
 														<Child Name="ToolStripContentPanel" Owner="{322AEF4E-0043-475C-8973-1D59EAEBF57F}">
 															<Child Name="DetailedPositionListPanel" Owner="{698EAB05-9070-43EA-84DA-E2AAE943F993}">
 																<Child Name="DetailedPositionListView" Owner="{8232248E-62D2-4EA0-BE9D-7F5ADB2562B0}" />
+															</Child>
+														</Child>
+													</Child>
+												</Child>
+											</Child>
+											<Child Name="DockTabPage2" Owner="{B9F74FC3-C748-464B-9E5E-E1050F4E6EEC}">
+												<Child Name="DockContainer" Owner="{54C2644C-5199-447A-A5CB-B06BA2776BEA}">
+													<Child Name="toolStripContainer" Owner="{515102C4-7847-45F2-A9F8-D89F3F595C07}">
+														<Child Name="ToolStripContentPanel" Owner="{3BA50A5F-C1B6-4418-A21B-E76378BFC29F}">
+															<Child Name="TDMAvgPositionListPanel" Owner="{CD57EF80-9ED7-4363-8B6A-3F5E4838578A}">
+																<Child Name="AvgPositionListView" Owner="{54CCD96F-3BE8-4A95-B90B-677B4873DFCB}" />
 															</Child>
 														</Child>
 													</Child>
